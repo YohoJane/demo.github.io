@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一周天气</title>
+    <link rel="icon" href="https://profile.csdnimg.cn/2/E/A/0_yu17761517875" type="image/x-icon">
+</head>
+<body style="text-align: center;">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<div class="wrap" id="app" style="background-color: rgb(130, 130, 234);">
+    <h1>{{ city }}天气</h1>
+    <input type="text" class="input_txt" @keyup.enter="searchWeather" v-model="city" placeholder="请输入城市名称"/>
+    <input type="button" value="搜索" @click="searchWeather" class="input_sub"/>
+
+    <div class="hotkey">
+        热门城市：
+        <a href="javascript:;" @click="changeCity('沧州')">沧州</a>
+        <a href="javascript:;" @click="changeCity('桂林')">桂林</a>
+        <a href="javascript:;" @click="changeCity('唐山')">唐山</a>
+    </div>
+    
+    <ul class="weather_list">
+        <li v-for="item in weatherList">
+            {{ item.date}}
+            {{ item.type }}
+            {{ item.fengli }}
+            {{ item.fengxiang }}
+            {{ item.low + "~" +item.high}}
+    
+        </li>
+    
+    </ul>
+    
+	<span>@ powered by YohoJane</span>
+
+</div>
+
+
+
+<!--最后导入自己的js-->
+<script src="main.js"></script>
+    
+</body>
+</html>

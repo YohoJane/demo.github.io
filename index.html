@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报考专业记录本</title>
+    <link rel="icon" href="https://profile.csdnimg.cn/2/E/A/0_yu17761517875" type="image/x-icon">
+</head>
+<body style="background-color: rgb(228, 239, 200);text-align: center;">
+    <!--导入官网提供的axios,vue工具包-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--主体区域-->
+    <section id="todoapp">
+        <!--输入框-->
+        <header class="header">
+            <h1 style="font-size: 30px; color:brown;">报考专业记录本</h1>
+            <input autofocus="autofocus" autocomplete="off" placeholder="请输入专业" v-model="inputValue" @keyup.enter="add" class="new-todo"/>
+
+        </header>
+        <!--列表区域-->
+        <section class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item,index) in list">
+                    <div class="view">
+                        <span class="index">{{ index+1 }}.</span>
+                        <label>{{ item }}</label>
+                        <button class="destroy" @click="remove(index)">x</button>
+                    </div>
+
+                </li>
+            </ul>
+
+        </section>
+        <!--统计和清空-->
+        <footer class="footer">
+            <span class="todo-count" v-if="list.length!=0">
+                <strong>{{ "共" + list.length + "条记录" }}</strong>
+            </span>
+
+            <button class="clear-completed" v-show="list.length!=0" @click="clear">
+                清空记录
+            </button>
+
+        </footer>
+    </section>
+
+
+        <!--底部链接-->
+        <footer class="info">
+            <p>
+                <a href="http://www.gyzyxy.com/hangyexinwen/26133.html">
+                    <img src="https://www.pku.edu.cn/Uploads/Picture/2019/12/26/s5e04147ee4a83.png" width="200px" alt=""/>
+                </a>
+            </p>
+        </footer>
+        
+    <script>
+        var app = new Vue({
+            el:"#todoapp",
+            data:{
+                list:["计算机科学与技术","电子科学与技术","电子商务","口腔医学"],
+                inputValue:"机械设计与制造",
+            },
+            methods:{
+                add:function(){
+                    this.list.push(this.inputValue);
+                    this.inputValue = "";
+                },
+                remove:function(index){
+                    //alert("remove");
+                    //console.log("index");
+                    this.list.splice(index,1);//从哪删，一次删几个
+                },
+                clear:function(){
+                    this.list = [];
+                }
+            }
+        })
+    </script>
+
+
+<div id="app1" style="border: 1px solid brown;">
+        <button @click="getJoke">获取笑话</button>
+	    <a href="axios网络应用-周天气/周天气.html"><button>一周天气</button></a>
+        <p>{{ joke }}</p>
+    </div>
+
+    <script>
+        var test = new Vue({
+            el:"#app1",
+            data:{
+                joke:"......"
+            },
+            methods:{
+                getJoke:function(){
+                    var that = this;//保存好this
+
+                    axios.get("https://autumnfish.cn/api/joke")
+                    .then(function(response){
+                        //console.log(response);
+                        that.joke = response.data;
+                        //console.log(response.data);
+                    },function(err){
+                        console.log(err);
+                    })
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
