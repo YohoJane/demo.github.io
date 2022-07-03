@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线听歌</title>
+    <link rel="icon" href="https://profile.csdnimg.cn/2/E/A/0_yu17761517875" type="image/x-icon">
+
+    <style>
+        .wrap{
+            background-color: rgb(130, 130, 234);
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <!--导入官方提供的vue.js和axios.js扩展包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    
+    <div class="wrap">
+        <!--播放器主体区域-->
+        <div class="play_wrap" id="player">
+            <!--搜索框:不想使用缓存的input标签中添加 autocomplete="off"属性;-->
+            搜索：<input type="text" autocomplete="off" v-model="query" @keyup.enter="searchMusic">
+            <button @click="searchMusic">搜索</button>
+            <button @click="searchHot">热门歌曲</button>
+
+            <div class="video_con" v-show="isShow" style="display: none;" >
+                <video src="./392091001-1-208.mp4" controls="controls" style="width:100%;" ></video>
+                <div class="mask" @click="hide">隐藏视频</div>
+            </div>
+
+            <div class="center_con">
+                <!--歌曲列表-->
+                
+                <ul class="song_list">
+                    <li v-for="item in musicList">
+                    <a href="javascript:;" @click="playMusic(item.id)">播放</a>
+                    <b>{{ item.name}}</b>
+                    <b>{{ item.searchWord }}</b>
+                    <span v-if="item.mvid!=0" @click="playMV(item.mvid)"><i>MV</i></span>
+                    </li>
+                </ul>
+                
+            </div>
+
+            <div class="audio_con">
+                <div v-show="isPlaying!=0">
+                    <img v-bind:src="musicPhoto" width="200px" height="50px">
+                </div>
+                <audio ref="audio" v-on:play="play" @pause="pause" v-bind:src="musicUrl" controls autoplay loop class="myaudio"></audio>
+            </div>
+
+        </div>
+
+        <span>@ powered by YohoJane</span>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
