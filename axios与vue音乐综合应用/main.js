@@ -4,7 +4,8 @@ var app = new Vue({
         query:"", //查询数据对象
         musicUrl:"",
         musicPhoto:"https://vthumb.ykimg.com/054101015ACAD9FE8B324CA9EA9C8AD1",
-        musicList:[] //待渲染歌曲列表
+        musicList:[], //待渲染歌曲列表
+        isPlaying:false
     },
     methods:{
         searchMusic:function(){
@@ -42,6 +43,15 @@ var app = new Vue({
             })
 
         },
+
+        play:function(){
+            //console.log("play");
+            this.isPlaying = true;
+        },
+        pause:function(){
+            //console.log("pause");
+            this.isPlaying = false;
+        }
        
     }
 
