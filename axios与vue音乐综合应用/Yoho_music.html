@@ -45,7 +45,9 @@
             </div>
 
             <div class="audio_con">
-                <img v-bind:src="musicPhoto" width="200px" height="50px">
+                <div v-show="isPlaying!=0">
+                    <img v-bind:src="musicPhoto" width="200px" height="50px">
+                </div>
                 <audio ref="audio" v-bind:src="musicUrl" controls autoplay loop class="myaudio"></audio>
             </div>
         </div>
